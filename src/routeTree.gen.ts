@@ -9,8 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResearchRouteImport } from './routes/research'
+import { Route as ProjectLogRouteImport } from './routes/project-log'
+import { Route as MissionProgressRouteImport } from './routes/mission-progress'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ResearchRoute = ResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectLogRoute = ProjectLogRouteImport.update({
+  id: '/project-log',
+  path: '/project-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissionProgressRoute = MissionProgressRouteImport.update({
+  id: '/mission-progress',
+  path: '/mission-progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +37,61 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mission-progress': typeof MissionProgressRoute
+  '/project-log': typeof ProjectLogRoute
+  '/research': typeof ResearchRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mission-progress': typeof MissionProgressRoute
+  '/project-log': typeof ProjectLogRoute
+  '/research': typeof ResearchRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mission-progress': typeof MissionProgressRoute
+  '/project-log': typeof ProjectLogRoute
+  '/research': typeof ResearchRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/mission-progress' | '/project-log' | '/research'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/mission-progress' | '/project-log' | '/research'
+  id: '__root__' | '/' | '/mission-progress' | '/project-log' | '/research'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MissionProgressRoute: typeof MissionProgressRoute
+  ProjectLogRoute: typeof ProjectLogRoute
+  ResearchRoute: typeof ResearchRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/research': {
+      id: '/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/project-log': {
+      id: '/project-log'
+      path: '/project-log'
+      fullPath: '/project-log'
+      preLoaderRoute: typeof ProjectLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mission-progress': {
+      id: '/mission-progress'
+      path: '/mission-progress'
+      fullPath: '/mission-progress'
+      preLoaderRoute: typeof MissionProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,16 +104,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MissionProgressRoute: MissionProgressRoute,
+  ProjectLogRoute: ProjectLogRoute,
+  ResearchRoute: ResearchRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

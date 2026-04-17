@@ -116,7 +116,7 @@ function MissionProgressPage() {
           className="text-creamy text-2xl md:text-3xl mb-10"
         />
         <div className="space-y-6">
-          {SKILLS.map((s) => (
+          {SKILLS.map((s, i) => (
             <div key={s.label}>
               <div className="flex justify-between items-baseline mb-2">
                 <span className="text-xs uppercase tracking-[0.25em] text-creamy">
@@ -126,7 +126,7 @@ function MissionProgressPage() {
                   {s.value} / 100
                 </span>
               </div>
-              <ProgressBar value={s.value} />
+              <ProgressBar value={s.value} color={i % 2 === 0 ? "blue" : "cream"} />
             </div>
           ))}
         </div>

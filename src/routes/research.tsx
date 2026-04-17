@@ -21,42 +21,33 @@ export const Route = createFileRoute("/research")({
   component: ResearchPage,
 });
 
+const LOREM =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.";
+
 const ENTRIES = [
   {
     tag: "Essay",
     title: "On Slow Software",
     date: "Mar 2024",
-    body: "An argument for tools that resist the dopamine economy.",
+    body: LOREM,
   },
   {
     tag: "Note",
     title: "Local-first Primitives",
     date: "Feb 2024",
-    body: "A working list of CRDT patterns I keep reaching for.",
+    body: LOREM,
   },
   {
     tag: "Field log",
     title: "Workshop, week 14",
     date: "Jan 2024",
-    body: "What a month of pair-programming taught me about taste.",
+    body: LOREM,
   },
   {
     tag: "Essay",
     title: "Typography as Interface",
     date: "Dec 2023",
-    body: "The leading is the layout. The layout is the brand.",
-  },
-  {
-    tag: "Note",
-    title: "Reading list — Q4",
-    date: "Nov 2023",
-    body: "Twelve books on systems, cities and quiet attention.",
-  },
-  {
-    tag: "Field log",
-    title: "Atlas user interviews",
-    date: "Oct 2023",
-    body: "Recurring patterns from twenty cartographers in twenty cities.",
+    body: LOREM,
   },
 ];
 
@@ -71,19 +62,19 @@ function ResearchPage() {
           text="Research"
           className="text-creamy text-5xl md:text-7xl"
         />
-        <p className="mt-8 max-w-xl mx-auto text-creamy/80 italic">
+        <p className="mt-8 max-w-xl mx-auto text-creamy/80">
           Essays, working notes and field logs. Updated when there's something
           worth saying — not before.
         </p>
       </Section>
 
       <Section>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {ENTRIES.map((e) => (
             <a
               key={e.title}
               href="#"
-              className="group rounded-xl border border-creamy/15 bg-keystone/30 p-6 flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:border-carnelian hover:bg-keystone/50 hover:-translate-y-1"
+              className="group rounded-xl border border-creamy/20 bg-keystone p-6 flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:border-carnelian hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -98,9 +89,9 @@ function ResearchPage() {
                 <h3 className="text-creamy text-xl uppercase tracking-wide leading-tight">
                   {e.title}
                 </h3>
-                <p className="mt-3 text-sm text-creamy/75 italic">{e.body}</p>
+                <p className="mt-3 text-sm text-creamy/75">{e.body}</p>
               </div>
-              <p className="mt-6 text-[10px] uppercase tracking-[0.3em] text-minimalist/70">
+              <p className="mt-6 text-[10px] uppercase tracking-[0.3em] text-minimalist">
                 {e.date}
               </p>
             </a>

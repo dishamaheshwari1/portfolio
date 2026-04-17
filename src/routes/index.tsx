@@ -27,42 +27,47 @@ const FAN_CARDS = [
     rotate: -10,
     title: "Atlas",
     tag: "Cartography Engine",
-    desc: "Realtime maps for distributed teams.",
+    img: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=900&q=80&auto=format&fit=crop",
   },
   {
     rotate: 0,
     title: "Lumen",
     tag: "Reading Atelier",
-    desc: "A quiet space for long-form thought.",
+    img: "https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=900&q=80&auto=format&fit=crop",
   },
   {
     rotate: 10,
     title: "Forge",
     tag: "Build System",
-    desc: "Compiling intent into shipped product.",
+    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80&auto=format&fit=crop",
   },
 ];
 
 const TIMELINE = [
   {
-    year: "2024",
-    title: "Founded a small studio",
-    body: "Independent practice focused on tools for thinking.",
+    year: "2016",
+    title: "Started CS Degree",
+    body: "Began formal study of computer science and design fundamentals.",
+  },
+  {
+    year: "2018",
+    title: "First Internship",
+    body: "Joined a small product team and shipped my first feature to production.",
+  },
+  {
+    year: "2020",
+    title: "Senior Product Engineer",
+    body: "Led front-end architecture on a consumer app reaching millions.",
   },
   {
     year: "2022",
     title: "Principal Engineer",
-    body: "Led platform architecture for a Series B startup.",
+    body: "Owned platform direction at a Series B startup.",
   },
   {
-    year: "2019",
-    title: "Senior Product Engineer",
-    body: "Shipped consumer products to millions.",
-  },
-  {
-    year: "2016",
-    title: "First commit",
-    body: "Started writing software for the public web.",
+    year: "2024",
+    title: "Founded a Studio",
+    body: "Independent practice focused on tools for thinking.",
   },
 ];
 
@@ -70,7 +75,7 @@ function HomePage() {
   return (
     <div className="px-6 md:px-10">
       {/* HERO */}
-      <section className="max-w-6xl mx-auto pt-12 pb-24 text-center">
+      <section className="max-w-6xl mx-auto pt-12 pb-20 text-center">
         <p className="text-[11px] uppercase tracking-[0.4em] text-minimalist mb-8">
           Designer · Engineer · Operator
         </p>
@@ -78,40 +83,39 @@ function HomePage() {
           text="Marcus Vale"
           className="text-creamy text-6xl md:text-8xl lg:text-9xl"
         />
-        <p className="mt-10 max-w-xl mx-auto text-minimalist/90 italic">
+        <p className="mt-10 max-w-xl mx-auto text-creamy/80">
           Building considered software at the intersection of craft and
           systems thinking.
         </p>
       </section>
 
-      {/* PROJECT FAN */}
+      {/* PROJECT FAN — horizontal 16:9 cards */}
       <Section className="max-w-6xl mx-auto pb-32">
-        <div className="text-center mb-16">
-          <FirstLetterLarge
-            as="h2"
-            text="The Project Fan"
-            className="text-creamy text-3xl md:text-4xl"
-          />
-        </div>
-
-        <div className="relative h-[420px] md:h-[480px] flex items-center justify-center">
+        <div className="relative flex flex-wrap md:flex-nowrap items-center justify-center gap-6 md:gap-0 py-12">
           {FAN_CARDS.map((card, i) => (
             <motion.article
               key={card.title}
               initial={{ rotate: card.rotate, y: 0 }}
-              whileHover={{ rotate: 0, scale: 1.1, zIndex: 50, y: -10 }}
+              whileHover={{ rotate: 0, scale: 1.1, zIndex: 10, y: -10 }}
               transition={{ type: "spring", stiffness: 200, damping: 18 }}
               style={{
-                marginLeft: i === 0 ? 0 : "-80px",
-                zIndex: 10 + i,
+                marginLeft: i === 0 ? 0 : undefined,
+                zIndex: 5 - i,
               }}
-              className="relative w-56 md:w-64 h-80 md:h-96 rounded-2xl border border-creamy/80 bg-keystone/60 backdrop-blur-sm p-6 flex flex-col justify-between cursor-pointer shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)]"
+              className="relative w-full sm:w-72 md:w-80 aspect-video rounded-xl border border-creamy bg-keystone overflow-hidden cursor-pointer shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)] md:-ml-10 first:md:ml-0"
             >
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-creamy/70">
+              <img
+                src={card.img}
+                alt={card.title}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover opacity-60"
+              />
+              <div className="absolute inset-0 bg-sealskin/40" />
+              <div className="relative h-full flex flex-col justify-between p-5">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-creamy/80">
                   {card.tag}
                 </p>
-                <h3 className="heading-caps text-creamy text-2xl md:text-3xl mt-4">
+                <h3 className="heading-caps text-creamy text-2xl md:text-3xl">
                   <span className="word">
                     <span className="first-letter">
                       {card.title.charAt(0)}
@@ -120,7 +124,6 @@ function HomePage() {
                   </span>
                 </h3>
               </div>
-              <p className="text-sm text-creamy/80 italic">{card.desc}</p>
             </motion.article>
           ))}
         </div>
@@ -133,12 +136,12 @@ function HomePage() {
           text="Mission Statement"
           className="text-creamy text-3xl md:text-4xl mb-8 text-center"
         />
-        <p className="text-creamy/90 leading-relaxed text-lg italic text-center">
-          I build software the way a luthier builds an instrument — with patience,
+        <p className="text-creamy/90 leading-relaxed text-lg text-center">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. I build
+          software the way a luthier builds an instrument — with patience,
           tolerance for slow problems, and respect for the people who'll
-          eventually pick it up. My work sits between design systems, developer
-          tooling and product engineering; my favourite output is a piece of
-          software that quietly disappears into someone's daily ritual.
+          eventually pick it up. My favourite output is a piece of software
+          that quietly disappears into someone's daily ritual.
         </p>
       </Section>
 
@@ -171,7 +174,7 @@ function HomePage() {
                 <h3 className="text-creamy uppercase tracking-wider text-lg">
                   {event.title}
                 </h3>
-                <p className="text-creamy/70 italic mt-2 text-sm">
+                <p className="text-creamy/70 mt-2 text-sm">
                   {event.body}
                 </p>
               </div>

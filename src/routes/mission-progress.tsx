@@ -22,12 +22,11 @@ export const Route = createFileRoute("/mission-progress")({
 });
 
 const SKILLS = [
-  { label: "Product Engineering", value: 92 },
-  { label: "Design Systems", value: 86 },
-  { label: "Distributed Systems", value: 71 },
-  { label: "Type Theory", value: 58 },
-  { label: "Rust", value: 44 },
-  { label: "Writing", value: 80 },
+  { label: "React", value: 92 },
+  { label: "TypeScript", value: 88 },
+  { label: "Python", value: 76 },
+  { label: "Rust", value: 54 },
+  { label: "System Design", value: 70 },
 ];
 
 const CURRENT = [
@@ -44,8 +43,7 @@ const FUTURE = [
   { text: "Build a hardware companion to Lumen", done: false },
 ];
 
-function ProgressBar({ value, accent }: { value: number; accent: string }) {
-  // Render chunky retro segments
+function ProgressBar({ value }: { value: number }) {
   const segments = 20;
   const filled = Math.round((value / 100) * segments);
   return (
@@ -55,7 +53,12 @@ function ProgressBar({ value, accent }: { value: number; accent: string }) {
           key={i}
           className="flex-1 border border-creamy/30"
           style={{
-            backgroundColor: i < filled ? accent : "transparent",
+            backgroundColor:
+              i < filled
+                ? i % 2 === 0
+                  ? "var(--color-carnelian)"
+                  : "var(--color-creamy)"
+                : "transparent",
           }}
         />
       ))}
@@ -78,7 +81,7 @@ function Checklist({ items }: { items: { text: string; done: boolean }[] }) {
             {it.done && <Check className="w-3.5 h-3.5 text-creamy" strokeWidth={3} />}
           </span>
           <span
-            className={`text-sm md:text-base italic ${
+            className={`text-sm md:text-base ${
               it.done ? "text-minimalist line-through" : "text-creamy"
             }`}
           >
@@ -101,9 +104,10 @@ function MissionProgressPage() {
           text="Mission Progress"
           className="text-creamy text-5xl md:text-7xl"
         />
-        <p className="mt-8 max-w-xl mx-auto text-creamy/80 italic">
+        <p className="mt-8 max-w-xl mx-auto text-creamy/80">
           A live readout of where I'm strong, where I'm growing, and what I've
-          publicly committed to doing next.
+          publicly committed to doing next. Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit.
         </p>
       </Section>
 
@@ -115,7 +119,7 @@ function MissionProgressPage() {
           className="text-creamy text-2xl md:text-3xl mb-10"
         />
         <div className="space-y-6">
-          {SKILLS.map((s, i) => (
+          {SKILLS.map((s) => (
             <div key={s.label}>
               <div className="flex justify-between items-baseline mb-2">
                 <span className="text-xs uppercase tracking-[0.25em] text-creamy">
@@ -125,10 +129,7 @@ function MissionProgressPage() {
                   {s.value} / 100
                 </span>
               </div>
-              <ProgressBar
-                value={s.value}
-                accent={i % 2 === 0 ? "var(--color-carnelian)" : "var(--color-creamy)"}
-              />
+              <ProgressBar value={s.value} />
             </div>
           ))}
         </div>
@@ -142,15 +143,15 @@ function MissionProgressPage() {
           className="text-creamy text-2xl md:text-3xl mb-10"
         />
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-          <div className="rounded-xl border border-creamy/20 p-6 md:p-8 bg-keystone/30">
+          <div className="rounded-xl border border-creamy/20 p-6 md:p-8 bg-keystone/60">
             <h3 className="text-[11px] uppercase tracking-[0.3em] text-carnelian mb-6">
-              Current
+              Current Projects
             </h3>
             <Checklist items={CURRENT} />
           </div>
-          <div className="rounded-xl border border-creamy/20 p-6 md:p-8 bg-keystone/30">
+          <div className="rounded-xl border border-creamy/20 p-6 md:p-8 bg-keystone/60">
             <h3 className="text-[11px] uppercase tracking-[0.3em] text-minimalist mb-6">
-              Future
+              Future Projects
             </h3>
             <Checklist items={FUTURE} />
           </div>

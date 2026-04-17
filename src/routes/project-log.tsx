@@ -21,38 +21,41 @@ export const Route = createFileRoute("/project-log")({
   component: ProjectLogPage,
 });
 
+const LOREM =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
 const PROJECTS = [
   {
     title: "Atlas",
     year: "2024",
     role: "Founding Engineer",
-    body: "A realtime cartography engine designed for distributed product teams. Atlas renders shared spatial canvases at 60fps with offline-first sync, custom tiling and a bespoke layer compositor written in Rust + WebGL.",
+    body: LOREM,
     href: "#",
-    img: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=900&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&q=80&auto=format&fit=crop",
   },
   {
     title: "Lumen",
     year: "2023",
     role: "Designer & Engineer",
-    body: "An opinionated reading environment for long-form essays. Custom typesetting engine, ambient palette shifts that follow time-of-day, and a friction-free annotation layer that exports to plain markdown.",
+    body: LOREM,
     href: "#",
-    img: "https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=900&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=1200&q=80&auto=format&fit=crop",
   },
   {
     title: "Forge",
     year: "2022",
     role: "Tech Lead",
-    body: "An incremental build system for monorepos. Forge cut median CI time from 14 minutes to 90 seconds across a 400-package workspace and now powers internal tooling for several mid-size engineering teams.",
+    body: LOREM,
     href: "#",
-    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&q=80&auto=format&fit=crop",
   },
   {
     title: "Quill",
     year: "2021",
     role: "Solo Project",
-    body: "A correspondence client for people who write long letters. Threaded composition, scheduled delivery and a slow-mode that intentionally throttles the inbox to one batch per day.",
+    body: LOREM,
     href: "#",
-    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80&auto=format&fit=crop",
   },
 ];
 
@@ -79,12 +82,12 @@ function ProjectLogPage() {
                   flip ? "md:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                <div className="overflow-hidden rounded-2xl border border-creamy/20 bg-keystone/40">
+                <div className="overflow-hidden rounded-xl border border-creamy/30 bg-keystone aspect-video">
                   <img
                     src={p.img}
                     alt={p.title}
                     loading="lazy"
-                    className="w-full h-72 md:h-96 object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </div>
                 <div>
@@ -105,7 +108,7 @@ function ProjectLogPage() {
                       strokeWidth={1.5}
                     />
                   </a>
-                  <p className="mt-6 text-creamy/85 leading-relaxed italic">
+                  <p className="mt-6 text-creamy/85 leading-relaxed">
                     {p.body}
                   </p>
                 </div>

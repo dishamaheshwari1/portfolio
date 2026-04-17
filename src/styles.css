@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -6,17 +6,18 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Portfolio palette:
- *  Sealskin     #44403C  background
- *  Keystone     #908479  surface
- *  Carnelian    #58413E  accent / active
- *  Creamy       #EFE9DB  text / borders
- *  Minimalist   #C5BCB1  muted / inactive
+ * Portfolio palette (refactored — dark jewel-tone theme):
+ *  Sealskin     #0D0D0D  background (near-black)
+ *  Keystone     #1A1A1A  surface
+ *  Carnelian    #9B1B1B  accent / active (deep jewel red)
+ *  Creamy       #FDFCF0  text / borders
+ *  Minimalist   #8A857A  muted / inactive
  */
 
 @theme inline {
   --font-display: "Playfair Display", serif;
   --font-sans: "Playfair Display", serif;
+  --font-serif: "Playfair Display", serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -47,42 +48,42 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  /* Custom palette tokens */
-  --color-sealskin: #44403c;
-  --color-keystone: #908479;
-  --color-carnelian: #58413e;
-  --color-creamy: #efe9db;
-  --color-minimalist: #c5bcb1;
+  /* Custom palette tokens — dark jewel-tone */
+  --color-sealskin: #0d0d0d;
+  --color-keystone: #1a1a1a;
+  --color-carnelian: #9b1b1b;
+  --color-creamy: #fdfcf0;
+  --color-minimalist: #8a857a;
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* Map shadcn semantic tokens to portfolio palette */
-  --background: oklch(0.31 0.008 60);          /* Sealskin */
-  --foreground: oklch(0.93 0.018 80);          /* Creamy */
-  --card: oklch(0.6 0.012 60);                 /* Keystone */
-  --card-foreground: oklch(0.93 0.018 80);
-  --popover: oklch(0.31 0.008 60);
-  --popover-foreground: oklch(0.93 0.018 80);
-  --primary: oklch(0.36 0.022 30);             /* Carnelian */
-  --primary-foreground: oklch(0.93 0.018 80);
-  --secondary: oklch(0.6 0.012 60);
-  --secondary-foreground: oklch(0.93 0.018 80);
-  --muted: oklch(0.78 0.012 70);               /* Minimalist */
-  --muted-foreground: oklch(0.78 0.012 70);
-  --accent: oklch(0.36 0.022 30);
-  --accent-foreground: oklch(0.93 0.018 80);
+  --background: oklch(0.145 0 0);              /* near-black */
+  --foreground: oklch(0.97 0.02 95);           /* Creamy */
+  --card: oklch(0.2 0 0);
+  --card-foreground: oklch(0.97 0.02 95);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.97 0.02 95);
+  --primary: oklch(0.45 0.18 27);              /* deep jewel red */
+  --primary-foreground: oklch(0.97 0.02 95);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.97 0.02 95);
+  --muted: oklch(0.62 0.012 80);
+  --muted-foreground: oklch(0.62 0.012 80);
+  --accent: oklch(0.45 0.18 27);
+  --accent-foreground: oklch(0.97 0.02 95);
   --destructive: oklch(0.55 0.18 27);
-  --destructive-foreground: oklch(0.93 0.018 80);
-  --border: oklch(0.93 0.018 80 / 25%);
-  --input: oklch(0.93 0.018 80 / 20%);
-  --ring: oklch(0.93 0.018 80 / 50%);
+  --destructive-foreground: oklch(0.97 0.02 95);
+  --border: oklch(0.97 0.02 95 / 25%);
+  --input: oklch(0.97 0.02 95 / 20%);
+  --ring: oklch(0.97 0.02 95 / 50%);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
+    font-style: normal;
   }
 
   html,
@@ -100,14 +101,12 @@
 }
 
 @layer utilities {
-  /* All-caps display heading. First letter of every word renders 1.5x.
-     Apply by wrapping each word: <span class="word">Word</span> OR
-     simply use the FirstLetterLarge component which splits text. */
   .heading-caps {
     text-transform: uppercase;
     font-family: var(--font-display);
     letter-spacing: 0.02em;
     line-height: 0.95;
+    font-style: normal;
   }
 
   .heading-caps .word {
@@ -135,4 +134,5 @@
   .bg-creamy { background-color: var(--color-creamy); }
   .border-creamy { border-color: var(--color-creamy); }
   .border-minimalist { border-color: var(--color-minimalist); }
+  .border-carnelian { border-color: var(--color-carnelian); }
 }

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { FirstLetterLarge } from "../components/FirstLetterLarge";
 import { Section } from "../components/Section";
@@ -27,18 +27,21 @@ const FAN_CARDS = [
     rotate: -10,
     title: "Atlas",
     tag: "Cartography Engine",
+    slug: "atlas",
     img: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=900&q=80&auto=format&fit=crop",
   },
   {
     rotate: 0,
     title: "Lumen",
     tag: "Reading Atelier",
+    slug: "lumen",
     img: "https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=900&q=80&auto=format&fit=crop",
   },
   {
     rotate: 10,
     title: "Forge",
     tag: "Build System",
+    slug: "forge",
     img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80&auto=format&fit=crop",
   },
 ];
@@ -93,38 +96,41 @@ function HomePage() {
       <Section className="max-w-6xl mx-auto pb-32">
         <div className="relative flex flex-wrap md:flex-nowrap items-center justify-center gap-6 md:gap-0 py-12">
           {FAN_CARDS.map((card, i) => (
-            <motion.article
+            <motion.div
               key={card.title}
               initial={{ rotate: card.rotate, y: 0 }}
-              whileHover={{ rotate: 0, scale: 1.1, zIndex: 10, y: -10 }}
+              whileHover={{ rotate: 0, scale: 1.1, zIndex: 99, y: -10 }}
               transition={{ type: "spring", stiffness: 200, damping: 18 }}
-              style={{
-                marginLeft: i === 0 ? 0 : undefined,
-                zIndex: 5 - i,
-              }}
-              className="relative w-full sm:w-72 md:w-80 aspect-video rounded-xl border border-creamy bg-keystone overflow-hidden cursor-pointer shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)] md:-ml-10 first:md:ml-0"
+              style={{ zIndex: i + 1 }}
+              className="relative w-full sm:w-72 md:w-80 aspect-video md:-ml-10 first:md:ml-0"
             >
-              <img
-                src={card.img}
-                alt={card.title}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover opacity-60"
-              />
-              <div className="absolute inset-0 bg-sealskin/40" />
-              <div className="relative h-full flex flex-col justify-between p-5">
-                <p className="text-[10px] uppercase tracking-[0.3em] text-creamy/80">
-                  {card.tag}
-                </p>
-                <h3 className="heading-caps text-creamy text-2xl md:text-3xl">
-                  <span className="word">
-                    <span className="first-letter">
-                      {card.title.charAt(0)}
+              <Link
+                to="/project-log/$slug"
+                params={{ slug: card.slug }}
+                className="block relative w-full h-full rounded-xl border border-creamy bg-keystone overflow-hidden cursor-pointer shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]"
+              >
+                <img
+                  src={card.img}
+                  alt={card.title}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60"
+                />
+                <div className="absolute inset-0 bg-sealskin/40" />
+                <div className="relative h-full flex flex-col justify-between p-5">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-creamy/80">
+                    {card.tag}
+                  </p>
+                  <h3 className="heading-caps text-creamy text-2xl md:text-3xl">
+                    <span className="word">
+                      <span className="first-letter">
+                        {card.title.charAt(0)}
+                      </span>
+                      {card.title.slice(1).toUpperCase()}
                     </span>
-                    {card.title.slice(1).toUpperCase()}
-                  </span>
-                </h3>
-              </div>
-            </motion.article>
+                  </h3>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </Section>

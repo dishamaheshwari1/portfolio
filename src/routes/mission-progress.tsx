@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check } from "lucide-react";
-import { useState } from "react";
 import { FirstLetterLarge } from "../components/FirstLetterLarge";
 import { Section } from "../components/Section";
 
@@ -44,17 +43,17 @@ const FUTURE = [
   { text: "Build a hardware companion to Lumen", done: false },
 ];
 
-function ProgressBar({ value, color }: { value: number; color: "blue" | "cream" }) {
+function ProgressBar({ value, color }: { value: number; color: "navy" | "cream" }) {
   const segments = 20;
   const filled = Math.round((value / 100) * segments);
   const fill =
-    color === "blue" ? "var(--color-carnelian)" : "var(--color-creamy)";
+    color === "navy" ? "var(--color-carnelian)" : "var(--color-lace)";
   return (
     <div className="flex gap-[3px] h-5">
       {Array.from({ length: segments }).map((_, i) => (
         <div
           key={i}
-          className="flex-1 border border-creamy/30"
+          className="flex-1 border border-lace/30"
           style={{
             backgroundColor: i < filled ? fill : "transparent",
           }}
@@ -65,30 +64,22 @@ function ProgressBar({ value, color }: { value: number; color: "blue" | "cream" 
 }
 
 function Checklist({ items }: { items: { text: string; done: boolean }[] }) {
-  const [state, setState] = useState(items);
-  const toggle = (idx: number) =>
-    setState((prev) =>
-      prev.map((it, i) => (i === idx ? { ...it, done: !it.done } : it)),
-    );
   return (
     <ul className="space-y-3">
-      {state.map((it, idx) => (
+      {items.map((it) => (
         <li key={it.text} className="flex items-start gap-3">
-          <button
-            type="button"
-            onClick={() => toggle(idx)}
-            aria-pressed={it.done}
-            aria-label={it.text}
-            className={`mt-1 w-5 h-5 shrink-0 border flex items-center justify-center transition-colors cursor-pointer ${
+          <span
+            aria-hidden
+            className={`mt-1 w-5 h-5 shrink-0 border flex items-center justify-center ${
               it.done
                 ? "bg-carnelian border-carnelian"
-                : "border-creamy/40 bg-transparent hover:border-creamy"
+                : "border-lace/50 bg-transparent"
             }`}
           >
             {it.done && (
               <Check className="w-3.5 h-3.5 text-creamy" strokeWidth={3} />
             )}
-          </button>
+          </span>
           <span
             className={`text-sm md:text-base select-none ${
               it.done ? "text-creamy/60" : "text-creamy"
@@ -138,7 +129,7 @@ function MissionProgressPage() {
                   {s.value} / 100
                 </span>
               </div>
-              <ProgressBar value={s.value} color={i % 2 === 0 ? "blue" : "cream"} />
+              <ProgressBar value={s.value} color={i % 2 === 0 ? "navy" : "cream"} />
             </div>
           ))}
         </div>

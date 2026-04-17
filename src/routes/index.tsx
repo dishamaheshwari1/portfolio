@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { FirstLetterLarge } from "../components/FirstLetterLarge";
 import { Section } from "../components/Section";
@@ -104,10 +104,9 @@ function HomePage() {
               style={{ zIndex: i + 1 }}
               className="relative w-full sm:w-72 md:w-80 aspect-video md:-ml-10 first:md:ml-0"
             >
-              <Link
-                to="/project-log/$slug"
-                params={{ slug: card.slug }}
-                className="block relative w-full h-full rounded-xl border border-creamy bg-keystone overflow-hidden cursor-pointer shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]"
+              <a
+                href={`/project-log#${card.slug}`}
+                className="block relative w-full h-full rounded-xl border border-lace bg-keystone overflow-hidden cursor-pointer shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]"
               >
                 <img
                   src={card.img}
@@ -129,7 +128,7 @@ function HomePage() {
                     </span>
                   </h3>
                 </div>
-              </Link>
+              </a>
             </motion.div>
           ))}
         </div>

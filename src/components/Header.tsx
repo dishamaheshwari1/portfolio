@@ -11,11 +11,11 @@ export function Header() {
   const { pathname } = useLocation();
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-sealskin border-b border-creamy/10">
+    <header className="fixed top-0 inset-x-0 z-50 bg-sealskin border-b border-lace/15">
       <nav className="max-w-7xl mx-auto px-6 md:px-10 py-5 flex items-center justify-between">
         <Link
           to="/"
-          className="text-creamy text-sm tracking-[0.3em] uppercase hover:text-creamy/80 transition-colors"
+          className="text-creamy text-sm tracking-[0.3em] uppercase hover:text-lace transition-colors"
         >
           Portfolio
         </Link>
@@ -30,7 +30,7 @@ export function Header() {
                     "text-[10px] md:text-xs uppercase tracking-[0.25em] transition-colors duration-300",
                     active
                       ? "text-carnelian"
-                      : "text-minimalist hover:text-creamy",
+                      : "text-creamy hover:text-lace",
                   ].join(" ")}
                 >
                   {item.label}

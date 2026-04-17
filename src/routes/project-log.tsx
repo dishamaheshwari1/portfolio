@@ -41,11 +41,12 @@ function ProjectLogPage() {
           return (
             <Section key={p.slug}>
               <article
-                className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center ${
+                id={p.slug}
+                className={`scroll-mt-28 grid md:grid-cols-2 gap-10 md:gap-16 items-center ${
                   flip ? "md:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                <div className="overflow-hidden rounded-xl border border-creamy/30 bg-keystone aspect-video">
+                <div className="overflow-hidden rounded-xl border border-lace/40 bg-keystone aspect-video">
                   <img
                     src={p.img}
                     alt={p.title}
@@ -54,7 +55,7 @@ function ProjectLogPage() {
                   />
                 </div>
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-minimalist mb-4">
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-lace mb-4">
                     {p.year} · {p.role}
                   </p>
                   <a

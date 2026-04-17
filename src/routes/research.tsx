@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { FirstLetterLarge } from "../components/FirstLetterLarge";
 import { Section } from "../components/Section";
+import { RESEARCH } from "../data/research";
 
 export const Route = createFileRoute("/research")({
   head: () => ({
@@ -20,36 +21,6 @@ export const Route = createFileRoute("/research")({
   }),
   component: ResearchPage,
 });
-
-const LOREM =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.";
-
-const ENTRIES = [
-  {
-    tag: "Essay",
-    title: "On Slow Software",
-    date: "Mar 2024",
-    body: LOREM,
-  },
-  {
-    tag: "Note",
-    title: "Local-first Primitives",
-    date: "Feb 2024",
-    body: LOREM,
-  },
-  {
-    tag: "Field log",
-    title: "Workshop, week 14",
-    date: "Jan 2024",
-    body: LOREM,
-  },
-  {
-    tag: "Essay",
-    title: "Typography as Interface",
-    date: "Dec 2023",
-    body: LOREM,
-  },
-];
 
 function ResearchPage() {
   return (
@@ -70,10 +41,11 @@ function ResearchPage() {
 
       <Section>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {ENTRIES.map((e) => (
-            <a
-              key={e.title}
-              href="#"
+          {RESEARCH.map((e) => (
+            <Link
+              key={e.slug}
+              to="/research/$slug"
+              params={{ slug: e.slug }}
               className="group rounded-xl border border-creamy/20 bg-keystone p-6 flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:border-carnelian hover:-translate-y-1"
             >
               <div>
@@ -94,7 +66,7 @@ function ResearchPage() {
               <p className="mt-6 text-[10px] uppercase tracking-[0.3em] text-minimalist">
                 {e.date}
               </p>
-            </a>
+            </Link>
           ))}
         </div>
       </Section>

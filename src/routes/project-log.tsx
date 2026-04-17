@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { FirstLetterLarge } from "../components/FirstLetterLarge";
 import { Section } from "../components/Section";
+import { PROJECTS } from "../data/projects";
 
 export const Route = createFileRoute("/project-log")({
   head: () => ({
@@ -21,44 +22,6 @@ export const Route = createFileRoute("/project-log")({
   component: ProjectLogPage,
 });
 
-const LOREM =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-
-const PROJECTS = [
-  {
-    title: "Atlas",
-    year: "2024",
-    role: "Founding Engineer",
-    body: LOREM,
-    href: "#",
-    img: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&q=80&auto=format&fit=crop",
-  },
-  {
-    title: "Lumen",
-    year: "2023",
-    role: "Designer & Engineer",
-    body: LOREM,
-    href: "#",
-    img: "https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=1200&q=80&auto=format&fit=crop",
-  },
-  {
-    title: "Forge",
-    year: "2022",
-    role: "Tech Lead",
-    body: LOREM,
-    href: "#",
-    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&q=80&auto=format&fit=crop",
-  },
-  {
-    title: "Quill",
-    year: "2021",
-    role: "Solo Project",
-    body: LOREM,
-    href: "#",
-    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80&auto=format&fit=crop",
-  },
-];
-
 function ProjectLogPage() {
   return (
     <div className="px-6 md:px-10 max-w-6xl mx-auto">
@@ -76,7 +39,7 @@ function ProjectLogPage() {
         {PROJECTS.map((p, i) => {
           const flip = i % 2 === 1;
           return (
-            <Section key={p.title}>
+            <Section key={p.slug}>
               <article
                 className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center ${
                   flip ? "md:[&>*:first-child]:order-2" : ""
@@ -96,7 +59,9 @@ function ProjectLogPage() {
                   </p>
                   <a
                     href={p.href}
-                    className="group inline-flex items-baseline gap-3 hover:text-carnelian transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-baseline gap-3"
                   >
                     <FirstLetterLarge
                       as="h2"
@@ -104,8 +69,8 @@ function ProjectLogPage() {
                       className="text-creamy text-4xl md:text-5xl group-hover:text-carnelian transition-colors"
                     />
                     <ExternalLink
-                      className="w-5 h-5 text-minimalist group-hover:text-carnelian transition-colors"
-                      strokeWidth={1.5}
+                      className="w-5 h-5 text-carnelian group-hover:opacity-80 transition-opacity"
+                      strokeWidth={1.75}
                     />
                   </a>
                   <p className="mt-6 text-creamy/85 leading-relaxed">

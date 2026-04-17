@@ -13,6 +13,8 @@ import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ProjectLogRouteImport } from './routes/project-log'
 import { Route as MissionProgressRouteImport } from './routes/mission-progress'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResearchSlugRouteImport } from './routes/research.$slug'
+import { Route as ProjectLogSlugRouteImport } from './routes/project-log.$slug'
 
 const ResearchRoute = ResearchRouteImport.update({
   id: '/research',
@@ -34,39 +36,74 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResearchSlugRoute = ResearchSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ResearchRoute,
+} as any)
+const ProjectLogSlugRoute = ProjectLogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProjectLogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mission-progress': typeof MissionProgressRoute
-  '/project-log': typeof ProjectLogRoute
-  '/research': typeof ResearchRoute
+  '/project-log': typeof ProjectLogRouteWithChildren
+  '/research': typeof ResearchRouteWithChildren
+  '/project-log/$slug': typeof ProjectLogSlugRoute
+  '/research/$slug': typeof ResearchSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mission-progress': typeof MissionProgressRoute
-  '/project-log': typeof ProjectLogRoute
-  '/research': typeof ResearchRoute
+  '/project-log': typeof ProjectLogRouteWithChildren
+  '/research': typeof ResearchRouteWithChildren
+  '/project-log/$slug': typeof ProjectLogSlugRoute
+  '/research/$slug': typeof ResearchSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/mission-progress': typeof MissionProgressRoute
-  '/project-log': typeof ProjectLogRoute
-  '/research': typeof ResearchRoute
+  '/project-log': typeof ProjectLogRouteWithChildren
+  '/research': typeof ResearchRouteWithChildren
+  '/project-log/$slug': typeof ProjectLogSlugRoute
+  '/research/$slug': typeof ResearchSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/mission-progress' | '/project-log' | '/research'
+  fullPaths:
+    | '/'
+    | '/mission-progress'
+    | '/project-log'
+    | '/research'
+    | '/project-log/$slug'
+    | '/research/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/mission-progress' | '/project-log' | '/research'
-  id: '__root__' | '/' | '/mission-progress' | '/project-log' | '/research'
+  to:
+    | '/'
+    | '/mission-progress'
+    | '/project-log'
+    | '/research'
+    | '/project-log/$slug'
+    | '/research/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/mission-progress'
+    | '/project-log'
+    | '/research'
+    | '/project-log/$slug'
+    | '/research/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MissionProgressRoute: typeof MissionProgressRoute
-  ProjectLogRoute: typeof ProjectLogRoute
-  ResearchRoute: typeof ResearchRoute
+  ProjectLogRoute: typeof ProjectLogRouteWithChildren
+  ResearchRoute: typeof ResearchRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -99,15 +136,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/research/$slug': {
+      id: '/research/$slug'
+      path: '/$slug'
+      fullPath: '/research/$slug'
+      preLoaderRoute: typeof ResearchSlugRouteImport
+      parentRoute: typeof ResearchRoute
+    }
+    '/project-log/$slug': {
+      id: '/project-log/$slug'
+      path: '/$slug'
+      fullPath: '/project-log/$slug'
+      preLoaderRoute: typeof ProjectLogSlugRouteImport
+      parentRoute: typeof ProjectLogRoute
+    }
   }
 }
+
+interface ProjectLogRouteChildren {
+  ProjectLogSlugRoute: typeof ProjectLogSlugRoute
+}
+
+const ProjectLogRouteChildren: ProjectLogRouteChildren = {
+  ProjectLogSlugRoute: ProjectLogSlugRoute,
+}
+
+const ProjectLogRouteWithChildren = ProjectLogRoute._addFileChildren(
+  ProjectLogRouteChildren,
+)
+
+interface ResearchRouteChildren {
+  ResearchSlugRoute: typeof ResearchSlugRoute
+}
+
+const ResearchRouteChildren: ResearchRouteChildren = {
+  ResearchSlugRoute: ResearchSlugRoute,
+}
+
+const ResearchRouteWithChildren = ResearchRoute._addFileChildren(
+  ResearchRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MissionProgressRoute: MissionProgressRoute,
-  ProjectLogRoute: ProjectLogRoute,
-  ResearchRoute: ResearchRoute,
+  ProjectLogRoute: ProjectLogRouteWithChildren,
+  ResearchRoute: ResearchRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

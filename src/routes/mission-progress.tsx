@@ -43,9 +43,11 @@ const FUTURE = [
   { text: "Build a hardware companion to Lumen", done: false },
 ];
 
-function ProgressBar({ value }: { value: number }) {
+function ProgressBar({ value, color }: { value: number; color: "blue" | "cream" }) {
   const segments = 20;
   const filled = Math.round((value / 100) * segments);
+  const fill =
+    color === "blue" ? "var(--color-carnelian)" : "var(--color-creamy)";
   return (
     <div className="flex gap-[3px] h-5">
       {Array.from({ length: segments }).map((_, i) => (
@@ -53,12 +55,7 @@ function ProgressBar({ value }: { value: number }) {
           key={i}
           className="flex-1 border border-creamy/30"
           style={{
-            backgroundColor:
-              i < filled
-                ? i % 2 === 0
-                  ? "var(--color-carnelian)"
-                  : "var(--color-creamy)"
-                : "transparent",
+            backgroundColor: i < filled ? fill : "transparent",
           }}
         />
       ))}
@@ -82,7 +79,7 @@ function Checklist({ items }: { items: { text: string; done: boolean }[] }) {
           </span>
           <span
             className={`text-sm md:text-base ${
-              it.done ? "text-minimalist line-through" : "text-creamy"
+              it.done ? "text-creamy/60" : "text-creamy"
             }`}
           >
             {it.text}

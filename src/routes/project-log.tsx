@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
+import { Link as LinkIcon } from "lucide-react";
 import { FirstLetterLarge } from "../components/FirstLetterLarge";
 import { Section } from "../components/Section";
 import { PROJECTS } from "../data/projects";
@@ -62,19 +62,19 @@ function ProjectLogPage() {
                     href={p.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-baseline gap-3"
+                    className="group/title inline-flex items-baseline gap-3"
                   >
                     <FirstLetterLarge
                       as="h2"
                       text={p.title}
-                      className="text-creamy text-4xl md:text-5xl group-hover:text-carnelian transition-colors"
+                      className="text-creamy text-4xl md:text-5xl transition-colors"
                     />
-                    <ExternalLink
-                      className="w-5 h-5 text-carnelian group-hover:opacity-80 transition-opacity"
+                    <LinkIcon
+                      className="w-5 h-5 text-creamy opacity-50 group-hover/title:text-carnelian group-hover/title:opacity-100 transition-all duration-300"
                       strokeWidth={1.75}
                     />
                   </a>
-                  <p className="mt-6 text-creamy/85 leading-relaxed">
+                  <p className="mt-6 text-creamy/85 leading-relaxed not-italic">
                     {p.body}
                   </p>
                 </div>

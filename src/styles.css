@@ -6,10 +6,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Portfolio palette (refactored — dark jewel-tone theme):
+ * Portfolio palette (dark jewel-tone theme):
  *  Sealskin     #0D0D0D  background (near-black)
  *  Keystone     #1A1A1A  surface
- *  Carnelian    #9B1B1B  accent / active (deep jewel red)
+ *  Carnelian    #2563EB  accent / active (deep sapphire blue)
  *  Creamy       #FDFCF0  text / borders
  *  Minimalist   #8A857A  muted / inactive
  */
@@ -51,7 +51,7 @@
   /* Custom palette tokens — dark jewel-tone */
   --color-sealskin: #0d0d0d;
   --color-keystone: #1a1a1a;
-  --color-carnelian: #9b1b1b;
+  --color-carnelian: #2563eb;
   --color-creamy: #fdfcf0;
   --color-minimalist: #8a857a;
 }
@@ -65,13 +65,13 @@
   --card-foreground: oklch(0.97 0.02 95);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.97 0.02 95);
-  --primary: oklch(0.45 0.18 27);              /* deep jewel red */
+  --primary: oklch(0.51 0.21 263);             /* deep sapphire blue */
   --primary-foreground: oklch(0.97 0.02 95);
   --secondary: oklch(0.2 0 0);
   --secondary-foreground: oklch(0.97 0.02 95);
   --muted: oklch(0.62 0.012 80);
   --muted-foreground: oklch(0.62 0.012 80);
-  --accent: oklch(0.45 0.18 27);
+  --accent: oklch(0.51 0.21 263);
   --accent-foreground: oklch(0.97 0.02 95);
   --destructive: oklch(0.55 0.18 27);
   --destructive-foreground: oklch(0.97 0.02 95);

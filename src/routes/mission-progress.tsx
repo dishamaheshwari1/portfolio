@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check } from "lucide-react";
+import { useState } from "react";
 import { FirstLetterLarge } from "../components/FirstLetterLarge";
 import { Section } from "../components/Section";
 
@@ -64,21 +65,32 @@ function ProgressBar({ value, color }: { value: number; color: "blue" | "cream" 
 }
 
 function Checklist({ items }: { items: { text: string; done: boolean }[] }) {
+  const [state, setState] = useState(items);
+  const toggle = (idx: number) =>
+    setState((prev) =>
+      prev.map((it, i) => (i === idx ? { ...it, done: !it.done } : it)),
+    );
   return (
     <ul className="space-y-3">
-      {items.map((it) => (
+      {state.map((it, idx) => (
         <li key={it.text} className="flex items-start gap-3">
-          <span
-            className={`mt-1 w-5 h-5 shrink-0 border flex items-center justify-center transition-colors ${
+          <button
+            type="button"
+            onClick={() => toggle(idx)}
+            aria-pressed={it.done}
+            aria-label={it.text}
+            className={`mt-1 w-5 h-5 shrink-0 border flex items-center justify-center transition-colors cursor-pointer ${
               it.done
                 ? "bg-carnelian border-carnelian"
-                : "border-creamy/40 bg-transparent"
+                : "border-creamy/40 bg-transparent hover:border-creamy"
             }`}
           >
-            {it.done && <Check className="w-3.5 h-3.5 text-creamy" strokeWidth={3} />}
-          </span>
+            {it.done && (
+              <Check className="w-3.5 h-3.5 text-creamy" strokeWidth={3} />
+            )}
+          </button>
           <span
-            className={`text-sm md:text-base ${
+            className={`text-sm md:text-base select-none ${
               it.done ? "text-creamy/60" : "text-creamy"
             }`}
           >

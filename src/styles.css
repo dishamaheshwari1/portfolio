@@ -49,13 +49,13 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  /* Custom palette tokens — navy + lace */
-  --color-sealskin: #0d0d0d;
-  --color-keystone: #1a1a1a;
-  --color-carnelian: #607d8b;
-  --color-creamy: #f5f5f5;
-  --color-lace: #dcd9d0;
-  --color-minimalist: #dcd9d0;
+  /* Custom palette tokens — pure black + ivory + blue ocean */
+  --color-sealskin: #000000;
+  --color-keystone: #0a0a0a;
+  --color-carnelian: #316A8C;
+  --color-creamy: #FFFFF0;
+  --color-lace: #FFFFF0;
+  --color-minimalist: #FFFFF0;
 }
 
 :root {

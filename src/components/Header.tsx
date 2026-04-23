@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 const NAV = [
   { to: "/", label: "Mission Statement" },
   { to: "/project-log", label: "Project Log" },
-  { to: "/mission-progress", label: "Mission Progress" },
+  { to: "/mission-progress", label: "Skillset" },
   { to: "/research", label: "Research" },
 ] as const;
 
@@ -11,7 +11,7 @@ export function Header() {
   const { pathname } = useLocation();
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-sealskin border-b border-lace/15">
+    <header className="fixed top-0 inset-x-0 z-[100] bg-sealskin border-b border-lace/15">
       <nav className="max-w-7xl mx-auto px-6 md:px-10 py-5 flex items-center justify-between">
         <Link
           to="/"

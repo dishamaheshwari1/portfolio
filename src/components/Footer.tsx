@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-creamy/10 bg-sealskin">
+    <footer className="mt-24 border-t border-creamy/10 bg-carnelian">
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-8 flex items-center justify-center">
         <ul className="flex items-center gap-8">
           {[
@@ -11,7 +11,7 @@ export function Footer() {
             <li key={l.label}>
               <a
                 href={l.href}
-                className="text-[10px] uppercase tracking-[0.3em] text-minimalist hover:text-creamy transition-colors"
+                className="text-[10px] uppercase tracking-[0.3em] text-creamy hover:text-creamy/70 transition-colors"
               >
                 {l.label}
               </a>

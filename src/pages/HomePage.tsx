@@ -41,7 +41,7 @@ export default function HomePage() {
         <p className="text-[11px] uppercase tracking-[0.4em] text-minimalist mb-8">
           Designer · Engineer · Operator
         </p>
-        <FirstLetterLarge text="Marcus Maheshwari" className="text-creamy text-6xl md:text-8xl lg:text-9xl" />
+        <FirstLetterLarge text="Disha Maheshwari" className="text-creamy text-6xl md:text-8xl lg:text-9xl" />
         <p className="mt-10 max-w-xl mx-auto text-creamy/80">
           Building considered software at the intersection of craft and systems thinking.
         </p>

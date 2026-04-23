@@ -65,45 +65,51 @@ function Checklist({ items }: { items: { text: string; done: boolean }[] }) {
 
 export default function MissionProgressPage() {
   return (
-    <div className="px-6 md:px-10 max-w-5xl mx-auto pb-16">
-      <Section className="text-center mb-16">
-        <p className="text-[11px] uppercase tracking-[0.4em] text-minimalist mb-6">
-          Telemetry · current sprint
-        </p>
-        <FirstLetterLarge text="Mission Progress" className="text-creamy text-5xl md:text-7xl" />
-        <p className="mt-8 max-w-xl mx-auto text-creamy/80">
-          A live readout of where I'm strong, where I'm growing, and what I've publicly committed to doing next.
-        </p>
-      </Section>
+    <div>
+      <div className="px-6 md:px-10 max-w-5xl mx-auto pb-16">
+        <Section className="text-center mb-16">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-minimalist mb-6">
+            Telemetry · current sprint
+          </p>
+          <FirstLetterLarge text="Skillset" className="text-creamy text-5xl md:text-7xl" />
+          <p className="mt-8 max-w-xl mx-auto text-creamy/80">
+            A live readout of where I'm strong, where I'm growing, and what I've publicly committed to doing next.
+          </p>
+        </Section>
 
-      <Section className="mb-24">
-        <FirstLetterLarge as="h2" text="System Stats" className="text-creamy text-2xl md:text-3xl mb-10" />
-        <div className="space-y-6">
-          {SKILLS.map((s, i) => (
-            <div key={s.label}>
-              <div className="flex justify-between items-baseline mb-2">
-                <span className="text-xs uppercase tracking-[0.25em] text-creamy">{s.label}</span>
-                <span className="text-xs text-minimalist tabular-nums">{s.value} / 100</span>
+        <Section className="mb-24">
+          <FirstLetterLarge as="h2" text="System Stats" className="text-creamy text-2xl md:text-3xl mb-10" />
+          <div className="space-y-6">
+            {SKILLS.map((s, i) => (
+              <div key={s.label}>
+                <div className="flex justify-between items-baseline mb-2">
+                  <span className="text-xs uppercase tracking-[0.25em] text-creamy">{s.label}</span>
+                  <span className="text-xs text-minimalist tabular-nums">{s.value} / 100</span>
+                </div>
+                <ProgressBar value={s.value} color={i % 2 === 0 ? "navy" : "cream"} />
               </div>
-              <ProgressBar value={s.value} color={i % 2 === 0 ? "navy" : "cream"} />
-            </div>
-          ))}
-        </div>
-      </Section>
+            ))}
+          </div>
+        </Section>
+      </div>
 
-      <Section>
-        <FirstLetterLarge as="h2" text="Quest Log" className="text-creamy text-2xl md:text-3xl mb-10" />
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-          <div className="rounded-xl border border-creamy/20 p-6 md:p-8 bg-keystone/60">
-            <h3 className="text-[11px] uppercase tracking-[0.3em] text-carnelian mb-6">Current Projects</h3>
-            <Checklist items={CURRENT} />
-          </div>
-          <div className="rounded-xl border border-creamy/20 p-6 md:p-8 bg-keystone/60">
-            <h3 className="text-[11px] uppercase tracking-[0.3em] text-minimalist mb-6">Future Projects</h3>
-            <Checklist items={FUTURE} />
-          </div>
+      <div className="bg-carnelian w-full py-20">
+        <div className="px-6 md:px-10 max-w-5xl mx-auto">
+          <Section>
+            <FirstLetterLarge as="h2" text="Quest Log" className="text-creamy text-2xl md:text-3xl mb-10" />
+            <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+              <div className="rounded-xl border border-creamy/30 p-6 md:p-8 bg-sealskin/30">
+                <h3 className="text-[11px] uppercase tracking-[0.3em] text-creamy mb-6">Current Projects</h3>
+                <Checklist items={CURRENT} />
+              </div>
+              <div className="rounded-xl border border-creamy/30 p-6 md:p-8 bg-sealskin/30">
+                <h3 className="text-[11px] uppercase tracking-[0.3em] text-creamy mb-6">Future Projects</h3>
+                <Checklist items={FUTURE} />
+              </div>
+            </div>
+          </Section>
         </div>
-      </Section>
+      </div>
     </div>
   );
 }

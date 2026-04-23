@@ -39,7 +39,7 @@ export default function HomePage() {
     <div className="px-6 md:px-10">
       <section className="max-w-6xl mx-auto pt-12 pb-20 text-center">
         <p className="text-[11px] uppercase tracking-[0.4em] text-minimalist mb-8">
-          Designer · Engineer · Operator
+          Developer · Engineer · Thinker
         </p>
         <FirstLetterLarge text="Disha Maheshwari" className="text-creamy text-6xl md:text-8xl lg:text-9xl" />
         <p className="mt-10 max-w-xl mx-auto text-creamy/80">
